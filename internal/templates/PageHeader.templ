@@ -1,0 +1,14 @@
+package templates
+
+import (
+	"strings"
+)
+
+templ PageHeader(text string) {
+	<div
+		class="text-3xl before:content-[attr(data-text)] before:text-zinc-400 before:absolute before:left-1 before:bottom-[-4px] before:z-[-1] relative before:tracking-wider tracking-wider"
+		data-text={ strings.ToUpper(text) }
+	>
+		{ strings.ToUpper(text) }
+	</div>
+}
