@@ -15,22 +15,60 @@ templ footer() {
 	<footer class="bg-blue-600 p-4"></footer>
 }
 
-templ nav(){
-	<nav class="bg-blue-600 p-4">
-		<a class="text-gray-200" href="/">Home</a>
-		<a class="text-gray-200" href="/register">Register</a>
-		<a class="text-gray-200" href="/login">Login</a>
-		<a class="text-gray-200" href="/about">About</a>
+func isNavItemActive(path string) bool {
+	return path == "/about"
+}
+
+templ Box(isActive bool) {
+	<div
+		class={ "size-3 transition-colors",
+		templ.KV("bg-dark", !isActive),
+		templ.KV("bg-light", isActive) }
+	></div>
+}
+
+templ NavItem(label, path string) {
+	<a
+		href={ templ.URL(path) }
+		class={ "uppercase py-1 px-3 min-w-32 bg-dark/20 hover:bg-dark hover:text-light transition-colors flex gap-x-2 items-center",
+			templ.KV("bg-dark text-light", isNavItemActive(path)) }
+	>
+		@Box(isNavItemActive(path))
+		<span>{ label }</span>
+	</a>
+}
+
+var staffLight = "before:content-[' '] p-1 before:pl-1 before:w-1 before:border-l-8 before:border-r-[3px] before:border-dark/20"
+var staffDark = "before:content-[' '] p-1 before:pl-1 before:border-l-8 before:border-r-[3px] before:border-dark"
+
+templ nav() {
+	<nav class={ "container mx-auto flex gap-x-5 py-3 p-1", staffLight }>
+		@NavItem("Home", "/")
+		@NavItem("Register", "/register")
+		@NavItem("Login", "/login")
+		@NavItem("About", "/about")
 	</nav>
+}
+
+css noInteract() {
+	user-select: none;
+	pointer-events: none;
+}
+
+css shadowBackground() {
+	background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,0.23) 100%);
 }
 
 templ Layout(contents templ.Component, title string) {
 	@header(title)
-	<body class="flex flex-col h-full">
 	@nav()
-	<main class="flex-1">
-		@contents
-	</main>
+	<hr class="border-b-dark border-b-4 border-t-0"/>
+	<body class="flex flex-col h-full bg-neutral">
+		<div class={ "absolute inset-0 z-10", shadowBackground(), noInteract() }></div>
+		<div class={ "absolute inset-0 z-11 bg-grid bg-[length:3px_3px]", noInteract() }></div>
+		<main class="flex-1 container mx-auto relative">
+			@contents
+		</main>
+		<hr class="border-b-dark border-b-4 mb-20 border-t-0"/>
 	</body>
-	@footer()
 }

@@ -1,5 +1,52 @@
 package templates
 
 templ About() {
-	<p>About page content</p>
+	<section class="flex flex-col py-4 h-full">
+		@PageHeader("about")
+		<div class="py-10">
+			<div class={ staffLight, "relative before:absolute before:left-0 before:top-0 before:h-full pl-8 flex flex-nowrap" }>
+				<div class="flex-1 flex flex-col gap-y-4 relative">
+					@VerticalItem("Favorite Color")
+					@VerticalItem("Favorite Color")
+					@VerticalItem("Favorite Color")
+					@VerticalItem("Favorite Color")
+					@VerticalItem("Favorite Color")
+				</div>
+				@Spacer()
+				<div class="flex-1 h-80">
+					<div class="flex flex-col min-h-full">
+						<div class="bg-dark text-light px-2 py-1">Hello World</div>
+						<div class="flex-1 bg-lighter p-2">Silly</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		@Spacer()
+		<div class={ staffDark, "relative before:absolute before:left-0 before:top-0 before:h-full pl-6 bg-lighter p-3 w-full shadow-[3px_3px_0_#605d52] z-[-1]" }>
+			This is the footer
+		</div>
+	</section>
+}
+
+templ Spacer() {
+	<div class="flex-1"></div>
+}
+
+var topLine = "before:block before:h-[3px] before:absolute before:top-[-6px] before:left-0 before:w-full before:origin-right before:opacity-0 before:bg-dark hocus:before:opacity-100 before:pointer-events-none before:transition-all before:duration-300"
+var bottomLine = "after:block after:h-[2px] after:absolute after:bottom-[-6px] after:left-0 after:w-full after:origin-right after:opacity-0 after:bg-dark hocus:after:opacity-100 after:pointer-events-none after:transition-all after:duration-300"
+
+templ VerticalItem(label string) {
+	<div
+		class={ "uppercase py-1 px-3 min-w-32 bg-dark/20 hover:text-light relative flex gap-x-2 items-center group",
+		topLine, bottomLine }
+		tabIndex="0"
+	>
+		@FillBackground()
+		@Box(true)
+		<span>{ label }</span>
+	</div>
+}
+
+templ FillBackground() {
+	<div class="absolute inset-0 bg-dark z-[-1] origin-left scale-x-0 group-hover:scale-x-100 duration-300"></div>
 }

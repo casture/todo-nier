@@ -1,14 +1,15 @@
 package templates
 
 templ Index(email string) {
-		<div>
-		Welcome {email}
-		</div>
-
+	@PageHeader("home")
+	<div>
+		Welcome { email }
+	</div>
 }
 
 templ GuestIndex() {
+	@PageHeader("home")
 	<div>
-	Welcome guest
+		Welcome guest
 	</div>
 }

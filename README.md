@@ -1,4 +1,6 @@
-# GoTTH
+# Todo App [Nier Automata Theme]
+
+## GoTTH
 A simple, modern stack for building fast web applications.
 
 **Watch walk-through video:**
@@ -10,23 +12,23 @@ A simple, modern stack for building fast web applications.
 * Templ - Templating
 * HTMX - Interactivity
 
-## Technologies
-### Tailwind
+### Technologies
+#### Tailwind
 To get started with TailWind CSS, make sure you have the correct binary in the root directory.
 https://tailwindcss.com/blog/standalone-cli
 
-### Templ
+#### Templ
 https://templ.guide/
 
-### Air
+#### Air
 Air is required for hot reloading used in ```make dev```
 https://github.com/cosmtrek/air
 
 
-## Makefile
+### Makefile
 This Makefile is designed to simplify common development tasks for your project. It includes targets for building your Go application, watching and building Tailwind CSS, generating templates, and running your development server using Air.
 
-### Targets:
+#### Targets:
 ```bash
 make tailwind-watch
 ```
@@ -59,3 +61,6 @@ make build
 ```
 This target orchestrates the building process by executing the tailwind-build, templ-generate, and go build commands sequentially. It creates the binary output in the ./bin/ directory.
 
+## TODO
+[ ] Sound effects
+[ ] Intro animation
